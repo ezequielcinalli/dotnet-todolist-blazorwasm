@@ -1,0 +1,9 @@
+﻿<li>
+    <MudCheckBox @bind-Checked="@Item.IsDone" Label="@Item.Title" Color="Color.Primary"></MudCheckBox>
+</li>
+
+@code {
+    [Parameter]
+    public Todo Item { get; set; }
+
+}

@@ -2,7 +2,43 @@
 
 <PageTitle>Todo List App</PageTitle>
 
-<h1>Todo List App</h1>
+<MudContainer>
+    <MudText Typo="Typo.h1" Align="Align.Center">Todo List</MudText>
+    <div class="d-flex gap-3">
+        <MudTextField @bind-Value="newTodo" Label="Title" Variant="Variant.Outlined">
+        </MudTextField>
+        <MudButton OnClick="AddTodo" Variant="Variant.Filled" Color="Color.Primary">Add todo</MudButton>
+    </div>
+    <div class="mt-5">
+        <ul>
+            @foreach (var item in items)
+            {
+                <TodoItem Item="@item" />
+            }
+        </ul>
+    </div>
+</MudContainer>
 
-<MudButton Variant="Variant.Filled" Color="Color.Primary">Add todo</MudButton>
+@code {
+    private List<Todo> items = new List<Todo>();
+    private string newTodo = string.Empty;
 
+    protected override Task OnInitializedAsync()
+    {
+        items.Add(new Todo("Item1"));
+        items.Add(new Todo("Item3"));
+        return base.OnInitializedAsync();
+    }
+
+    private void AddTodo()
+    {
+        Console.WriteLine("entro add");
+        Console.WriteLine(newTodo);
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            Console.WriteLine("entro if");
+            items.Add(new Todo(newTodo));
+            newTodo = string.Empty;
+        }
+    }
+}
