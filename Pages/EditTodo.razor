@@ -1,14 +1,51 @@
 @page "/edit/{Id:int}"
+@inject NavigationManager NavManager
+@inject ITodoService TodoServ
+
 <PageTitle>Todo List App - Edit todo</PageTitle>
 
-<p>Edit Todo</p>
-<p>Id: @Id</p>
+<MudText Typo="Typo.h2">Edit Todo</MudText>
+<div class="d-flex flex-column gap-5">
+    <div class="d-flex align-stretch">
+        <div class="blue-grey darken-4 mr-3">
+            <MudCheckBox @bind-Checked="@Todo!.IsDone" Color="Color.Primary"></MudCheckBox>
+        </div>
+        <MudTextField @bind-Value="Todo!.Title" Label="Title" Variant="Variant.Outlined">
+        </MudTextField>
+    </div>
+</div>
 
-<NavLink class="nav-link" href="/">
-    <span class="oi oi-home" aria-hidden="true"></span> Volver
-</NavLink>
+<div class="center mt-6">
+    <NavLink href="/">
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Large">
+            Cancel
+        </MudButton>
+    </NavLink>
+    <MudButton class="ml-2" OnClick="Edit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">Edit todo
+    </MudButton>
+</div>
 
 @code {
     [Parameter]
     public int Id { get; set; }
+
+    public Todo? Todo { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        Todo = TodoServ.GetTodo(Id);
+        return base.OnInitializedAsync();
+    }
+
+    private void Edit()
+    {
+        TodoServ.UpdateTodo(Todo!);
+        NavManager.NavigateTo("/");
+    }
 }
+
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
