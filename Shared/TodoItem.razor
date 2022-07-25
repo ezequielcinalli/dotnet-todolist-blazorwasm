@@ -1,6 +1,6 @@
 ﻿<div class="d-flex justify-space-between mb-3 rounded-lg blue-grey darken-4 white-text">
     <div class="d-flex align-center">
-        <MudCheckBox @bind-Checked="@Item!.IsDone" Color="Color.Primary"></MudCheckBox>
+        <MudCheckBox ReadOnly="true" @bind-Checked="@Item!.IsDone" Color="Color.Primary"></MudCheckBox>
         <p class='@(@Item.IsDone ? "line-through" : "" )'>@Item!.Title</p>
     </div>
     <div class=" mx-3 d-flex flex-end align-center gap-2">

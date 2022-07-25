@@ -1,9 +1,12 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider/>
-<MudDialogProvider/>
-<MudSnackbarProvider/>
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
 <main>
-    @Body
+    <MudContainer>
+        <MudText Typo="Typo.h1" Align="Align.Center">Todo List</MudText>
+        @Body
+    </MudContainer>
 </main>
