@@ -1,0 +1,14 @@
+@page "/delete/{Id:int}"
+<PageTitle>Todo List App - Delete todo</PageTitle>
+
+<p>Delete Todo</p>
+<p>Id: @Id</p>
+
+<NavLink class="nav-link" href="/">
+    <span class="oi oi-home" aria-hidden="true"></span> Volver
+</NavLink>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}

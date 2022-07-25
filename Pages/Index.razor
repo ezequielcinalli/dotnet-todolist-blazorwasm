@@ -10,12 +10,10 @@
         <MudButton OnClick="AddTodo" Variant="Variant.Filled" Color="Color.Primary">Add todo</MudButton>
     </div>
     <div class="mt-5">
-        <ul>
-            @foreach (var item in items)
-            {
-                <TodoItem Item="@item" />
-            }
-        </ul>
+        @foreach (var item in items)
+        {
+            <TodoItem Item="@item" />
+        }
     </div>
 </MudContainer>
 
@@ -25,8 +23,8 @@
 
     protected override Task OnInitializedAsync()
     {
-        items.Add(new Todo("Item1"));
-        items.Add(new Todo("Item3"));
+        items.Add(new Todo(items.Count, "Item1"));
+        items.Add(new Todo(items.Count, "Item2"));
         return base.OnInitializedAsync();
     }
 
@@ -37,7 +35,7 @@
         if (!string.IsNullOrWhiteSpace(newTodo))
         {
             Console.WriteLine("entro if");
-            items.Add(new Todo(newTodo));
+            items.Add(new Todo(items.Count, newTodo));
             newTodo = string.Empty;
         }
     }

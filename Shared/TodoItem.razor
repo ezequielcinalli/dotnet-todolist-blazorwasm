@@ -1,9 +1,27 @@
-﻿<li>
-    <MudCheckBox @bind-Checked="@Item.IsDone" Label="@Item.Title" Color="Color.Primary"></MudCheckBox>
-</li>
+﻿<div class="d-flex justify-space-between mb-3 rounded-lg blue-grey darken-4 white-text">
+    <div class="d-flex align-center">
+        <MudCheckBox @bind-Checked="@Item!.IsDone" Color="Color.Primary"></MudCheckBox>
+        <p class='@(@Item.IsDone ? "line-through" : "" )'>@Item!.Title</p>
+    </div>
+    <div class=" mx-3 d-flex flex-end align-center gap-2">
+        <NavLink class="nav-link" href='@($"/edit/{Item.Id}")'>
+            <MudIcon class="cursor-pointer" Icon="@Icons.Material.Filled.Edit" Color="Color.Warning" aria-label="edit">
+            </MudIcon>
+        </NavLink>
+        <NavLink class="nav-link" href='@($"/delete/{Item.Id}")'>
+            <MudIcon class="cursor-pointer" ButtonType="ButtonType.Button" Icon="@Icons.Material.Filled.Delete"
+                Color="Color.Error" aria-label="delete"></MudIcon>
+        </NavLink>
+    </div>
+</div>
 
 @code {
     [Parameter]
-    public Todo Item { get; set; }
-
+    public Todo? Item { get; set; }
 }
+
+<style>
+    .line-through {
+        text-decoration: line-through;
+    }
+</style>

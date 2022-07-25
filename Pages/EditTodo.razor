@@ -1,0 +1,14 @@
+@page "/edit/{Id:int}"
+<PageTitle>Todo List App - Edit todo</PageTitle>
+
+<p>Edit Todo</p>
+<p>Id: @Id</p>
+
+<NavLink class="nav-link" href="/">
+    <span class="oi oi-home" aria-hidden="true"></span> Volver
+</NavLink>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}
