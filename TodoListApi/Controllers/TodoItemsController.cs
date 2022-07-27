@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TodoApi.Models;
+using TodoListApi.Models;
+using TodoListShared;
 
-namespace TodoApi.Controllers
+namespace TodoListApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

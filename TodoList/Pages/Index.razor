@@ -14,7 +14,7 @@
     {
         @foreach (var item in items)
         {
-            <TodoItem Item="@item" />
+            <TodoComponent Item="@item" />
         }
 
     }
@@ -24,7 +24,7 @@
     [Inject]
     public ITodoService TodoServ { get; set; } = default!;
 
-    private List<Todo>? items { get; set; }
+    private List<TodoItemDTO>? items { get; set; }
     private string newTodo = string.Empty;
 
     protected override async Task OnInitializedAsync()
@@ -36,7 +36,7 @@
     {
         if (!string.IsNullOrWhiteSpace(newTodo))
         {
-            Todo todoAdded = (Todo)await TodoServ.AddTodo(newTodo);
+            TodoItemDTO todoAdded = (TodoItemDTO)await TodoServ.AddTodo(newTodo);
             newTodo = string.Empty;
             items!.Add(todoAdded);
         }

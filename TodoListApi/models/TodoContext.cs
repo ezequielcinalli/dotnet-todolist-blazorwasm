@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
+using TodoListShared;
 
-namespace TodoApi.Models
+namespace TodoListApi.Models
 {
     public class TodoContext : DbContext
     {
@@ -12,4 +13,4 @@ namespace TodoApi.Models
 
         public DbSet<TodoItem> TodoItems { get; set; } = null!;
     }
-} 
+}
