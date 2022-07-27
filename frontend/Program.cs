@@ -10,8 +10,14 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddHttpClient<ITodoService,TodoService>(client =>{
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+});
+
+// builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddSingleton<ITodoService,TodoService>();
 builder.Services.AddMudServices();
+
+builder.Logging.SetMinimumLevel(LogLevel.None);
 
 await builder.Build().RunAsync();

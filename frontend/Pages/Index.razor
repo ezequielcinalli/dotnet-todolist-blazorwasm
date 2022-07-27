@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inject ITodoService TodoServ
+@using System.Threading.Tasks
 
 <PageTitle>Todo List App</PageTitle>
 
@@ -10,28 +10,35 @@
     <MudButton OnClick="AddTodo" Variant="Variant.Filled" Color="Color.Primary">Add todo</MudButton>
 </div>
 <div class="mt-5">
-    @foreach (var item in items)
+    @if (items != null)
     {
-        <TodoItem Item="@item" />
+        @foreach (var item in items)
+        {
+            <TodoItem Item="@item" />
+        }
+
     }
 </div>
 
 @code {
-    private List<Todo> items = new List<Todo>();
+    [Inject]
+    public ITodoService TodoServ { get; set; } = default!;
+
+    private List<Todo>? items { get; set; }
     private string newTodo = string.Empty;
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        items = TodoServ.getTodos();
-        return base.OnInitializedAsync();
+        items = (await TodoServ.getTodos()).ToList();
     }
 
-    private void AddTodo()
+    private async Task AddTodo()
     {
         if (!string.IsNullOrWhiteSpace(newTodo))
         {
-            TodoServ.AddTodo(newTodo);
+            Todo todoAdded = (Todo)await TodoServ.AddTodo(newTodo);
             newTodo = string.Empty;
+            items!.Add(todoAdded);
         }
     }
 }

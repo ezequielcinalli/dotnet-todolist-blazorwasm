@@ -29,15 +29,14 @@
 
     public Todo? Todo { get; set; }
 
-    protected override Task OnInitializedAsync()
+    protected async override Task OnInitializedAsync()
     {
-        Todo = TodoServ.GetTodo(Id);
-        return base.OnInitializedAsync();
+        Todo = await TodoServ.GetTodo(Id);
     }
 
-    private void Delete()
+    private async void Delete()
     {
-        TodoServ.DeleteTodo(Todo!);
+        await TodoServ.DeleteTodo(Todo!);
         NavManager.NavigateTo("/");
     }
 }
