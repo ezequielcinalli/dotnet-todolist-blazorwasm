@@ -53,8 +53,8 @@ namespace TodoApi.Controllers
                 return NotFound();
             }
 
-            todoItem.Name = todoItemDTO.Name;
-            todoItem.IsComplete = todoItemDTO.IsComplete;
+            todoItem.Title = todoItemDTO.Title;
+            todoItem.IsDone = todoItemDTO.IsDone;
 
             try
             {
@@ -74,8 +74,8 @@ namespace TodoApi.Controllers
         {
             var todoItem = new TodoItem
             {
-                IsComplete = todoItemDTO.IsComplete,
-                Name = todoItemDTO.Name
+                IsDone = todoItemDTO.IsDone,
+                Title = todoItemDTO.Title
             };
 
             _context.TodoItems.Add(todoItem);
@@ -113,8 +113,8 @@ namespace TodoApi.Controllers
             new TodoItemDTO
             {
                 Id = todoItem.Id,
-                Name = todoItem.Name,
-                IsComplete = todoItem.IsComplete
+                Title = todoItem.Title,
+                IsDone = todoItem.IsDone
             };
     }
 }
